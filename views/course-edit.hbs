@@ -21,5 +21,11 @@
 
   <input type="hidden" name="id" value="{{course.id}}">
 
-  <button class="btn btn-primary">Редактировать курс</button>
+  <button type="submit" class="btn btn-primary">Редактировать курс</button>
+</form>
+
+<form action="/courses/remove" method="POST">
+  <input type="hidden" name="id" value="{{course.id}}">
+  <br>
+  <button  class="btn red"> Удалить курс</button>
 </form>
