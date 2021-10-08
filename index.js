@@ -29,12 +29,12 @@ app.use('/card', cardRoutes)
 
 const PORT = process.env.PORT || 4000
 
-
+// database connection
 async function start(){
   try {
-     const Mongo_url = 'mongodb+srv://sanzhar:FAebGccxUqWZTPC2@cluster0.set5o.mongodb.net/App?retryWrites=true&w=majority'
+     const Mongo_url = 'mongodb://localhost/nodeshop'
 
-      mongoose.connect(Mongo_url,{useNewUrlParser:true})
+      mongoose.connect(Mongo_url)
       app.listen(PORT, () => {
         console.log(`Server is running on port ${PORT}`)
       })
