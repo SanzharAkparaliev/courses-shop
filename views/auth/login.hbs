@@ -7,6 +7,9 @@
       </ul>
     </div>
     <div id="login" class="col s6 offset-s3">
+      {{#if loginError}}
+      <p class="alert">{{loginError}}</p>
+      {{/if}}
           <h3>Войти в магазин</h3>
       <form action="/auth/login" method="POST">
         <div class="input-field">
@@ -25,6 +28,9 @@
       </form>
     </div>
     <div id="register" class="col s6 offset-s3">
+         {{#if registerError}}
+           <p class="alert">{{registerError}}</p>
+         {{/if}}
                 <h3>Создать аккаунт</h3>
       <form action="/auth/register" method="POST">
         <div class="input-field">
@@ -39,11 +45,11 @@
           <span class="helper-text" data-error="Введите цену"></span>
         </div>
 
-         <div class="input-field">
+         {{!-- <div class="input-field">
           <input id="confirm" name="confirm" type="password" class="validate" required min="1">                                                                                         
           <label for="confirm">Пароль еще раз</label>
           <span class="helper-text" data-error="Введите цену"></span>
-        </div>
+        </div> --}}
 
         <div class="input-field">
           <input id="name" name="name" type="text" class="validate" required >                                                                                         
