@@ -11,6 +11,7 @@ const ordersRoutes = require('./routes/orders')
 const authRoutes = require('./routes/auth')
 const mongoose =require('mongoose')
 const varMiddleware = require('./middleware/veriabls')
+const UserMiddleware = require('./middleware/user')
 
 const app = express()
 
@@ -37,6 +38,7 @@ app.use(session({
   store:store
 }))
 app.use(varMiddleware)
+app.use(UserMiddleware)
 
 app.use('/', homeRoutes)
 app.use('/add', addRoutes)
