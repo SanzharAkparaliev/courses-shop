@@ -14,7 +14,7 @@ const authRoutes = require('./routes/auth')
 const mongoose =require('mongoose')
 const varMiddleware = require('./middleware/veriabls')
 const UserMiddleware = require('./middleware/user')
-
+const keys = require('./keys')
 const app = express()
 
 const hbs = exphbs.create({
@@ -24,7 +24,7 @@ const hbs = exphbs.create({
 
 const store = new MongoStore({
   collection:'session',
-  uri:'mongodb://localhost/nodeshop'
+  uri:keys.MONGODB_URI
 })
 
 app.engine('hbs', hbs.engine)
@@ -34,7 +34,7 @@ app.set('views', 'views')
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({extended: true}))
 app.use(session({
-  secret:'some secret value',
+  secret:keys.SESSION_SECRET,
   resave:false,
   saveUninitialized:false,
   store:store
@@ -52,13 +52,12 @@ app.use('/orders',ordersRoutes)
 app.use('/auth',authRoutes)
 
 
-const PORT = process.env.PORT || 4000
+const PORT = process.env.PORT || 3000
 
 // database connection
 async function start(){
   try {
-     const Mongo_url = 'mongodb://localhost/nodeshop'
-      mongoose.connect(Mongo_url)
+      mongoose.connect(keys.MONGODB_URI,{ useUnifiedTopology: true, useNewUrlParser: true })
       app.listen(PORT, () => {
         console.log(`Server is running on port ${PORT}`)
       })
