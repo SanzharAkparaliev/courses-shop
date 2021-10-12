@@ -24,6 +24,9 @@
           <span class="helper-text" data-error="Введите цену"></span>
         </div>
         <input type="hidden" name="_csrf" value="{{csrf}}">
+
+        <p><a href="/auth/reset">Забыли пароль?</a></p>
+
         <button class="btn btn-primary" type="submit">Войти</button>
       </form>
     </div>
@@ -45,11 +48,11 @@
           <span class="helper-text" data-error="Введите цену"></span>
         </div>
 
-         {{!-- <div class="input-field">
+         <div class="input-field">
           <input id="confirm" name="confirm" type="password" class="validate" required min="1">                                                                                         
           <label for="confirm">Пароль еще раз</label>
           <span class="helper-text" data-error="Введите цену"></span>
-        </div> --}}
+        </div>
 
         <div class="input-field">
           <input id="name" name="name" type="text" class="validate" required >                                                                                         
