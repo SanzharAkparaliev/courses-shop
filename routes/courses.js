@@ -2,6 +2,8 @@ const {Router} = require('express')
 const Course = require('../models/course')
 const router = Router()
 const auth = require('../middleware/auth')
+const {courseValidators} = require('../utils/validators')
+const {validationResult} = require('express-validator')
 
 
 router.get('/', async (req, res) => {
@@ -13,9 +15,23 @@ router.get('/', async (req, res) => {
   })
 })
 
-router.get('/:id/edit',auth, async (req, res) => {
-  if (!req.query.allow) {
+router.get('/:id/edit',auth ,async (req, res) => {
+    if (!req.query.allow) {
     return res.redirect('/')
+  }
+  
+  const errors = validationResult(req)
+  if(!errors.isEmpty()){
+    return res.status(422).render('add',{
+      title: 'Добавить курс',
+      isAdd: true,
+      error:errors.array()[0].msg,
+      data:{
+        title:req.body.title,
+        price:req.body.price,
+        img:req.body.img
+      }
+    })
   }
 
   const course = await Course.findById(req.params.id)
@@ -26,8 +42,14 @@ router.get('/:id/edit',auth, async (req, res) => {
   })
 })
 
-router.post('/edit',auth, async (req, res) => {
-  const {id} = req.body
+router.post('/edit',auth,courseValidators, async (req, res) => {
+  const errors = validationResult(req) 
+ const {id} = req.body
+
+  if(!errors.isEmpty()){
+    return res.status(422).redirect(`/courses/${id}/edit?allow=true`)
+  }
+
   delete req.body.id
   await Course.findByIdAndUpdate(id,req.body)
   res.redirect('/courses')
