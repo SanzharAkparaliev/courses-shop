@@ -1,0 +1,36 @@
+<h1>Профиль</h1>
+
+<div class="row">
+    <div class="col s6">
+        <img
+        class="avatar" 
+        src="https://images.ctfassets.net/s5uo95nf6njh/2fEr6ctL9FxPtOPhUcM4FA/773007e573bfa16aebdb736f767b45fa/evan-you-hero.jpg" 
+        alt=""
+        >
+        <p>Аватара нет</p>
+    </div>
+    <div class="col s6">
+        <form action="/profile" method="post">
+            <div class="input-field">
+                <p>Ваше email: <strong>{{user.email}}</strong></p>
+                <input type="name" name="name" class="validate" required  value="{{user.name}}">
+                <label for="name">Ваше иия</label>
+                <span class="helper-text" data-error="Имя не может быть пустым"></span>
+            </div>
+
+            <div class="file-field input-field">
+                <div class="btn">
+                    <span>Аватар</span>
+                    <input type="file" name="avatar">
+                </div>
+                <div class="file-path-wrapper">
+                    <input  class="file-path validate" type="text">
+                </div>
+            </div>
+
+            <input type="hidden" name="_csrf" value="{{csrf}}">
+
+            <button type="submit" class="btn">Изменить</button>
+        </form>
+    </div>
+</div>
